@@ -1,0 +1,41 @@
+﻿<Window x:Class="DomL.Presentation.BackupWindow"
+        xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+        xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+        xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
+        xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
+        xmlns:local="clr-namespace:DomL.Presentation"
+        mc:Ignorable="d"
+        Title="Backup Window" Height="450" Width="800">
+    <DockPanel>
+        <StackPanel>
+            <GroupBox Header="Backup">
+                <DockPanel>
+                    <StackPanel>
+                        <StackPanel Orientation="Horizontal">
+                            <Button Height="30" Width="80" Margin="5" Content="Auto" Click="AutoBackupButton_Click"/>
+                            <Button Height="30" Width="80" Margin="5" Content="Book" Click="BookBackupButton_Click"/>
+                            <Button Height="30" Width="80" Margin="5" Content="Comic" Click="ComicBackupButton_Click"/>
+                            <Button Height="30" Width="80" Margin="5" Content="Doom" Click="DoomBackupButton_Click"/>
+                            <Button Height="30" Width="80" Margin="5" Content="Event" Click="EventBackupButton_Click"/>
+                            <Button Height="30" Width="80" Margin="5" Content="Game" Click="GameBackupButton_Click"/>
+                            <Button Height="30" Width="80" Margin="5" Content="Gift" Click="GiftBackupButton_Click"/>
+                            <Button Height="30" Width="80" Margin="5" Content="Health" Click="HealthBackupButton_Click"/>
+                        </StackPanel>
+                        <StackPanel Orientation="Horizontal">
+                            <Button Height="30" Width="80" Margin="5" Content="Meet" Click="MeetBackupButton_Click"/>
+                            <Button Height="30" Width="80" Margin="5" Content="Movie" Click="MovieBackupButton_Click"/>
+                            <Button Height="30" Width="80" Margin="5" Content="Pet" Click="PetBackupButton_Click"/>
+                            <Button Height="30" Width="80" Margin="5" Content="Play" Click="PlayBackupButton_Click"/>
+                            <Button Height="30" Width="80" Margin="5" Content="Purchase" Click="PurchaseBackupButton_Click"/>
+                            <Button Height="30" Width="80" Margin="5" Content="Show" Click="ShowBackupButton_Click"/>
+                            <Button Height="30" Width="80" Margin="5" Content="Travel" Click="TravelBackupButton_Click"/>
+                            <Button Height="30" Width="80" Margin="5" Content="Work" Click="WorkBackupButton_Click"/>
+                        </StackPanel>
+                    </StackPanel>
+                </DockPanel>
+            </GroupBox>
+            <Label Name="MessageLabel"></Label>
+        </StackPanel>
+        
+    </DockPanel>
+</Window>
