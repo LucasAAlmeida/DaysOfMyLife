@@ -107,6 +107,20 @@ namespace DomL.Business.Services
             );
         }
 
+        public static List<string> GetDefaultTypeList()
+        {
+            var list = new List<string>();
+            list.AddRange(new string[] {
+                "Watch",
+                "PC",
+                "PS5", "PS4", "PS3", "PS2", "PSX",
+                "Switch", "Wii U", "Wii", "NGC", "N64", "SNES", "NES",
+                "3DS", "NDS", "GBA", "GBC", "NGB",
+                "XBOX Series", "XBOX One", "XBOX360", "XBOX",
+            });
+            return list;
+        }
+
         public static Game GetByTitle(string title, UnitOfWork unitOfWork)
         {
             if (string.IsNullOrWhiteSpace(title)) {

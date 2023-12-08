@@ -53,6 +53,12 @@ namespace DomL.Business.Services
                             continue;
                         }
 
+                        if (Util.IsLineNewMonth(rawLine, out int mes))
+                        {
+                            month = mes;
+                            continue;
+                        }
+
                         if (Util.IsLineNewDay(rawLine, out int dia)) {
                             date = new DateTime(year, month, dia);
                             dayOrder = 0;

@@ -40,8 +40,10 @@ namespace DomL.Presentation
 
             var shows = ShowService.GetAll(unitOfWork);
 
+            //Get Possible Values For Each Field
             var titleList = shows.Select(u => u.Title).Distinct().ToList();
             var typeList = shows.Where(u => u.Type != null).Select(u => u.Type).Distinct().ToList();
+            typeList.AddRange(ShowService.GetDefaultTypeList());
             var seriesList = shows.Where(u => u.Series != null).Select(u => u.Series).Distinct().ToList();
             var numberList = Util.GetDefaultSeasonsList();
             var personList = shows.Where(u => u.Person != null).Select(u => u.Person).Distinct().ToList();
@@ -49,6 +51,7 @@ namespace DomL.Presentation
             var yearList = Util.GetDefaultYearList();
             var scoreList = Util.GetDefaultScoreList();
 
+            // Place each segments on a ComboBox
             segments[0] = "";
             var remainingSegments = segments;
             var orderedSegments = new string[Enum.GetValues(typeof(NamedIndices)).Length];
@@ -58,6 +61,7 @@ namespace DomL.Presentation
             Util.SetComboBox(TitleCB, titleList, orderedSegments[(int)NamedIndices.title]);
             TitleCB_LostFocus(null, null);
 
+            // Place each segments on a ComboBox
             // SHOW; Title; Type; Series; Season; Person; Company; Year; Score; Description
             while (remainingSegments.Length > 2 && orderedSegments.Any(u => u == null)) {
                 var searched = remainingSegments[2];

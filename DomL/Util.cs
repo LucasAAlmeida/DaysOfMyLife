@@ -33,6 +33,11 @@ namespace DomL.Business.Utils
             return list.Any(u => CleanString(u) == cleanSearched);
         }
 
+        /// <summary>
+        /// Adds a dynamic label in the `segmentosStack` for each value in `segments`
+        /// </summary>
+        /// <param name="segments"></param>
+        /// <param name="segmentosStack"></param>
         public static void FillSegmentosStack(string[] segments, StackPanel segmentosStack)
         {
             for (int index = 1; index < segments.Length; index++) {
@@ -185,6 +190,27 @@ namespace DomL.Business.Utils
         public static bool IsLineBlank(string line)
         {
             return string.IsNullOrWhiteSpace(line) || line.StartsWith("---");
+        }
+
+        public static bool IsLineNewMonth(string line, out int monthNumber)
+        {
+            switch (line.ToLower())
+            {
+                case "january": case "janeiro": monthNumber = 1; break;
+                case "february": case "fevereiro": monthNumber = 2; break;
+                case "march": case "março": case "marco": monthNumber = 3; break;
+                case "april": case "abril": monthNumber = 4; break;
+                case "may": case "maio": monthNumber = 5; break;
+                case "june": case "junho": monthNumber = 6; break;
+                case "july": case "julho": monthNumber = 7; break;
+                case "august": case "agosto": monthNumber = 8; break;
+                case "september": case "setembro": monthNumber = 9; break;
+                case "october": case "outubro": monthNumber = 10; break;
+                case "november": case "novembro": monthNumber = 11; break;
+                case "december": case "dezembro": monthNumber = 12; break;
+                default: monthNumber = 0; return false;
+            }
+            return true;
         }
 
         public static bool IsLineNewDay(string linha, out int dia)

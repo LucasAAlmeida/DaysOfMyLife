@@ -40,8 +40,10 @@ namespace DomL.Presentation
 
             var games = GameService.GetAll(unitOfWork);
 
+            //Get Possible Values For Each Field
             var titleList = games.Select(u => u.Title).Distinct().ToList();
             var typeList = games.Where(u => u.Type != null).Select(u => u.Type).Distinct().ToList();
+            typeList.AddRange(GameService.GetDefaultTypeList());
             var seriesList = games.Where(u => u.Series != null).Select(u => u.Series).Distinct().ToList();
             var numberList = Util.GetDefaultNumberList();
             var personList = games.Where(u => u.Person != null).Select(u => u.Person).Distinct().ToList();
@@ -49,6 +51,7 @@ namespace DomL.Presentation
             var yearList = Util.GetDefaultYearList();
             var scoreList = Util.GetDefaultScoreList();
 
+            // Place each segments on a ComboBox
             segments[0] = "";
             var remainingSegments = segments;
             var orderedSegments = new string[Enum.GetValues(typeof(NamedIndices)).Length];
@@ -58,6 +61,7 @@ namespace DomL.Presentation
             Util.SetComboBox(TitleCB, titleList, orderedSegments[(int)NamedIndices.title]);
             TitleCB_LostFocus(null, null);
 
+            // Loop to organize (order) the segments according to the pre-defined order of ComboBoxes
             // GAME; Title; Type; Series; Number; Person; Company; Year; Score; Description
             while (remainingSegments.Length > 2 && orderedSegments.Any(u => u == null)) {
                 var searched = remainingSegments[2];

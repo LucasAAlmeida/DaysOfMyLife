@@ -96,6 +96,15 @@ namespace DomL.Business.Services
             return instance;
         }
 
+        public static List<string> GetDefaultTypeList()
+        {
+            var list = new List<string>();
+            list.AddRange(new string[] {
+                "Anime", "TV Series", "Cartoon", "Series"
+            });
+            return list;
+        }
+
         //TODO colocar year na search
         public static Show GetByTitle(string title, UnitOfWork unitOfWork)
         {
