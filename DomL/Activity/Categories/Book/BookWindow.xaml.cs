@@ -40,7 +40,7 @@ namespace DomL.Presentation
 
             var titleList = books.Select(u => u.Title).Distinct().ToList();
             var seriesList = books.Where(u => u.Series != null).Select(u => u.Series).Distinct().ToList();
-            var numberList = Util.GetDefaultNumberList();
+            var numberList = Util.GetDefaultNumbersList();
             var personList = books.Where(u => u.Person != null).Select(u => u.Person).Distinct().ToList();
             var companyList = books.Where(u => u.Company != null).Select(u => u.Company).Distinct().ToList();
             var yearList = Util.GetDefaultYearList();

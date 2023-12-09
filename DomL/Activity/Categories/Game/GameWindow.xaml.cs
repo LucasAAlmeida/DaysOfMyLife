@@ -45,7 +45,7 @@ namespace DomL.Presentation
             var typeList = games.Where(u => u.Type != null).Select(u => u.Type).Distinct().ToList();
             typeList.AddRange(GameService.GetDefaultTypeList());
             var seriesList = games.Where(u => u.Series != null).Select(u => u.Series).Distinct().ToList();
-            var numberList = Util.GetDefaultNumberList();
+            var numberList = Util.GetDefaultNumbersList();
             var personList = games.Where(u => u.Person != null).Select(u => u.Person).Distinct().ToList();
             var companyList = games.Where(u => u.Company != null).Select(u => u.Company).Distinct().ToList();
             var yearList = Util.GetDefaultYearList();
@@ -83,6 +83,8 @@ namespace DomL.Presentation
                     Util.PlaceOrderedSegment(orderedSegments, (int)NamedIndices.year, searched, indexesToAvoid);
                 } else if (Util.ListContainsText(scoreList, searched)) {
                     Util.PlaceOrderedSegment(orderedSegments, (int)NamedIndices.score, searched, indexesToAvoid);
+                } else if (searched.Length > 20) {
+                    Util.PlaceOrderedSegment(orderedSegments, (int)NamedIndices.description, searched, indexesToAvoid);
                 } else {
                     Util.PlaceStringInFirstAvailablePosition(orderedSegments, indexesToAvoid, searched);
                 }

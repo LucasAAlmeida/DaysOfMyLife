@@ -43,7 +43,7 @@ namespace DomL.Presentation
             var titleList = courses.Select(u => u.Title).Distinct().ToList();
             var typeList = courses.Where(u => u.Type != null).Select(u => u.Type).Distinct().ToList();
             var seriesList = courses.Where(u => u.Series != null).Select(u => u.Series).Distinct().ToList();
-            var numberList = Util.GetDefaultNumberList();
+            var numberList = Util.GetDefaultNumbersList();
             var personList = courses.Where(u => u.Person != null).Select(u => u.Person).Distinct().ToList();
             var companyList = courses.Where(u => u.Company != null).Select(u => u.Company).Distinct().ToList();
             var yearList = Util.GetDefaultYearList();

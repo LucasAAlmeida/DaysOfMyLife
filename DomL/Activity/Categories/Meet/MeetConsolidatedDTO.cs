@@ -24,8 +24,8 @@ namespace DomL.Business.DTOs
         {
             Person = Util.GetStringOrDash(rawSegments[1]);
             Origin = Util.GetStringOrDash(rawSegments[2]);
-            Description = Util.GetStringOrDash(rawSegments[3]);
-
+            Description = Util.GetStringOrDash(rawSegments.Length == 4 ? rawSegments[3] : "-");
+            
             FillCommonInfo();
         }
 

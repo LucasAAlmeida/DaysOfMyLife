@@ -41,7 +41,7 @@ namespace DomL.Presentation
 
             var titleList = movies.Select(u => u.Title).Distinct().ToList();
             var seriesList = movies.Where(u => u.Series != null).Select(u => u.Series).Distinct().ToList();
-            var numberList = Util.GetDefaultNumberList();
+            var numberList = Util.GetDefaultNumbersList();
             var personList = movies.Where(u => u.Person != null).Select(u => u.Person).Distinct().ToList();
             var companyList = movies.Where(u => u.Company != null).Select(u => u.Company).Distinct().ToList();
             var yearList = Util.GetDefaultYearList();

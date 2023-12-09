@@ -150,6 +150,12 @@ namespace DomL.Business.Services
             }
         }
 
+        /// <summary>
+        /// Gets all activities for the specified month/year,
+        /// then prints it to be put in the "Resumo do Mês" in the DomL, alongside the full raw month data from oneNote
+        /// </summary>
+        /// <param name="month"></param>
+        /// <param name="year"></param>
         public static void WriteMonthRecapFile(int month, int year)
         {
             string filePath = RECAPS_DIR + "Year" + year + "\\Months\\Month" + month.ToString("00") + ".txt";
@@ -170,6 +176,11 @@ namespace DomL.Business.Services
             }
         }
 
+        /// <summary>
+        /// Get all activities in the given `year`, then for each category,
+        /// writes the information that will be put in the "Entretenimento", "Acontecimentos", and "Eventos" of the DomL
+        /// </summary>
+        /// <param name="year"></param>
         public static void WriteYearRecapFiles(int year)
         {
             string fileDir = RECAPS_DIR + "Year" + year + "\\Categories\\";

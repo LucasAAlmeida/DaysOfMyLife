@@ -24,12 +24,23 @@ namespace DomL.Business.Utils
             if (string.IsNullOrWhiteSpace(value)) {
                 return null;
             }
-            return value.Replace(":", "").Replace("-", "").Replace("(", "").Replace(")", "").Replace(".", "").Replace(" ", "").Replace("'", "").Replace(",", "").ToLower().Replace("the", "");
+            return value.ToLower().Replace(" ", "")
+                .Replace(":", "").Replace("-", "")
+                .Replace(",", "").Replace(".", "")
+                .Replace("(", "").Replace(")", "").Replace("'", "")
+                .Replace("the", "");
         }
 
-        public static bool ListContainsText(List<string> list, string searched)
+        /// <summary>
+        /// Searches the given `term` in the given `list`
+        /// both the `term` and values from the `list` are cleaned before the comparison.
+        /// </summary>
+        /// <param name="list"></param>
+        /// <param name="term"></param>
+        /// <returns></returns>
+        public static bool ListContainsText(List<string> list, string term)
         {
-            var cleanSearched = CleanString(searched);
+            var cleanSearched = CleanString(term);
             return list.Any(u => CleanString(u) == cleanSearched);
         }
 
@@ -65,21 +76,27 @@ namespace DomL.Business.Utils
             }
         }
 
-        public static List<string> GetDefaultNumberList()
+        public static List<string> GetDefaultNumbersList()
         {
             var list = new List<string>();
-            for (int number = 0; number <= 10; number++) {
+
+            // e.g: 01, 02, 03, ... 98, 99
+            for (int number = 0; number <= 20; number++) {
                 list.Add(number.ToString("00"));
             }
-            return list;
-        }
 
-        public static List<string> GetDefaultSeasonsList()
-        {
-            var list = new List<string>();
-            for (int i = 1; i < 20; i++) {
-                list.Add("S" + i.ToString("00"));
+            // e.g: S01, S02, S03, ... S98, S99
+            for (int number = 1; number < 20; number++)
+            {
+                list.Add("S" + number.ToString("00"));
             }
+
+            // e.g: Chapter 01, Chapter 02, Chapter 03, ... Chapter 98, Chapter 99
+            for (int number = 1; number < 20; number++)
+            {
+                list.Add("Chapter " + number.ToString("00"));
+            }
+
             return list;
         }
 
@@ -95,7 +112,7 @@ namespace DomL.Business.Utils
         public static List<string> GetDefaultYearList()
         {
             var list = new List<string>();
-            for (int year=2020; year>=1988; year--) {
+            for (int year=2050; year>=1900; year--) {
                 list.Add(year.ToString());
             }
             return list;
