@@ -100,7 +100,10 @@ namespace DomL.Business.Services
         {
             var list = new List<string>();
             list.AddRange(new string[] {
-                "Anime", "TV Series", "Cartoon", "Series", "Web Series", "3D Animation", "Reality TV", "Animação", "Animation", "Web Show"
+                "Anime", "Cartoon", "Animação", "Animation", "3D Animation",
+                "Clay Animation", "Stop Motion",
+                "TV Series", "Series",  "Reality TV",
+                "Web Show", "Web Series",
             });
             return list;
         }

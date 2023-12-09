@@ -55,8 +55,15 @@ namespace DomL.Presentation
             segments[0] = "";
             var remainingSegments = segments;
             var orderedSegments = new string[Enum.GetValues(typeof(NamedIndices)).Length];
-
             var indexesToAvoid = new int[] { (int)NamedIndices.type, (int)NamedIndices.number, (int)NamedIndices.year, (int)NamedIndices.score };
+
+            // if the first segment (remainingSegments) is the type, take care of it first
+            if (Util.ListContainsText(typeList, remainingSegments[1]))
+            {
+                Util.PlaceOrderedSegment(orderedSegments, (int)NamedIndices.type, remainingSegments[1], indexesToAvoid);
+                remainingSegments = remainingSegments.Where(u => u != remainingSegments[1]).ToArray();
+            }
+
             Util.PlaceOrderedSegment(orderedSegments, (int)NamedIndices.title, remainingSegments[1], indexesToAvoid);
             Util.SetComboBox(TitleCB, titleList, orderedSegments[(int)NamedIndices.title]);
             TitleCB_LostFocus(null, null);
