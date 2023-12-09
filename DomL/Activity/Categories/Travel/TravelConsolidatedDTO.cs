@@ -52,7 +52,7 @@ namespace DomL.Business.DTOs
         public new string GetInfoForYearRecap()
         {
             return base.GetInfoForYearRecap()
-                + "\t" + GetTravelActivityInfo();
+                + "\t" + Transport + "\t" + Origin + " -> " + Destination;
         }
 
         public new string GetInfoForBackup()

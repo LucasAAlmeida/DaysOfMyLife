@@ -22,11 +22,11 @@ namespace DomL.Business.DTOs
             Block = Util.GetStringOrDash(activity.Block);
             ConsolidatedLine = activity.ConsolidatedLine;
 
-            var pairedDate = (activity.PairedActivity != null) ? Util.GetFormatedDate(activity.PairedActivity.Date) : "????/??/??";
+            var pairedDate = (activity.PairedActivity != null) ? Util.GetFormatedDate(activity.PairedActivity.Date) : "????-??-??";
             switch (activity.Status.Id) {
                 case Status.SINGLE:
                     StatusName = "Single";
-                    DatesStartAndFinish = "----------\t" + Date;
+                    DatesStartAndFinish = Date;
                     break;
                 case Status.START:
                     StatusName = "Start";

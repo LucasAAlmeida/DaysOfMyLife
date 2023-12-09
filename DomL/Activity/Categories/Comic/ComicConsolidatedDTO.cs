@@ -74,7 +74,7 @@ namespace DomL.Business.DTOs
         public new string GetInfoForYearRecap()
         {
             return base.GetInfoForYearRecap()
-                + "\t" + GetComicActivityInfo();
+                + "\t" + Title + "\t" + Type;
         }
 
         public new string GetInfoForBackup()

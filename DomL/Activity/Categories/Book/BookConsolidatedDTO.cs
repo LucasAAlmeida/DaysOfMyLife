@@ -70,7 +70,7 @@ namespace DomL.Business.DTOs
         public new string GetInfoForYearRecap()
         {
             return base.GetInfoForYearRecap()
-                + "\t" + GetBookActivityInfo();
+                + "\t" + Title;
         }
 
         public new string GetInfoForBackup()
