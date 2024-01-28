@@ -94,7 +94,7 @@
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
     </Page>
-    <Page Include="Windows\RestoreWindow.xaml">
+    <Page Include="Windows\MediaWindow.xaml">
       <Generator>MSBuild:Compile</Generator>
       <SubType>Designer</SubType>
     </Page>
@@ -160,8 +160,8 @@
     <Compile Include="Migrations\202012151743141_Initial.designer.cs">
       <DependentUpon>202012151743141_Initial.cs</DependentUpon>
     </Compile>
-    <Compile Include="Windows\RestoreWindow.xaml.cs">
-      <DependentUpon>RestoreWindow.xaml</DependentUpon>
+    <Compile Include="Windows\MediaWindow.xaml.cs">
+      <DependentUpon>MediaWindow.xaml</DependentUpon>
     </Compile>
     <Compile Include="DomLServices.cs" />
     <Compile Include="DomLExceptions.cs" />

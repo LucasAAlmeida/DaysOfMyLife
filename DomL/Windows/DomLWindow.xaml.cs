@@ -30,11 +30,11 @@ namespace DomL
             backupFullWindow.Show();
         }
 
-        private void MenuViewRestoreFull_Click(object sender, RoutedEventArgs e)
+        private void MenuViewMedia_Click(object sender, RoutedEventArgs e)
         {
-            var restoreFullWindow = new RestoreWindow();
+            var mediaWindow = new MediaWindow();
             Visibility = Visibility.Hidden;
-            restoreFullWindow.Show();
+            mediaWindow.Show();
         }
 
         private void SubmeterButton_Click(object sender, RoutedEventArgs e)

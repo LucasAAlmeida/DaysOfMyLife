@@ -1,0 +1,41 @@
+﻿<Window x:Class="DomL.Presentation.MediaWindow"
+        xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+        xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+        xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
+        xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
+        mc:Ignorable="d"
+        Title="Media Window" Height="450" Width="800">
+    <DockPanel>
+        <StackPanel>
+            <GroupBox Header="Get Media from Database">
+                <DockPanel>
+                    <StackPanel>
+                        <Button Height="30" Width="80" Margin="5" Content="All" Click="GetAllMediaFromDatabaseButton_Click"/>
+                        <StackPanel Orientation="Horizontal">
+                            <Button Height="30" Width="80" Margin="5" Content="Book" Click="GetBooksFromDatabaseButton_Click"/>
+                            <Button Height="30" Width="80" Margin="5" Content="Comic" Click="GetComicsFromDatabaseButton_Click"/>
+                            <Button Height="30" Width="80" Margin="5" Content="Game" Click="GetGamesFromDatabaseButton_Click"/>
+                            <Button Height="30" Width="80" Margin="5" Content="Movie" Click="GetMoviesFromDatabaseButton_Click"/>
+                            <Button Height="30" Width="80" Margin="5" Content="Show" Click="GetShowsFromDatabaseButton_Click"/>
+                        </StackPanel>
+                    </StackPanel>
+                </DockPanel>
+            </GroupBox>
+            <GroupBox Header="Save Media to Database">
+                <DockPanel>
+                    <StackPanel>
+                        <Button Height="30" Width="80" Margin="5" Content="All" Click="SaveAllMediaToDatabaseButton_Click"/>
+                        <StackPanel Orientation="Horizontal">
+                            <Button Height="30" Width="80" Margin="5" Content="Book" Click="SaveBooksToDatabaseButton_Click"/>
+                            <Button Height="30" Width="80" Margin="5" Content="Comic" Click="SaveComicsToDatabaseButton_Click"/>
+                            <Button Height="30" Width="80" Margin="5" Content="Game" Click="SaveGamesToDatabaseButton_Click"/>
+                            <Button Height="30" Width="80" Margin="5" Content="Movie" Click="SaveMoviesToDatabaseButton_Click"/>
+                            <Button Height="30" Width="80" Margin="5" Content="Show" Click="SaveShowsToDatabaseButton_Click"/>
+                        </StackPanel>
+                    </StackPanel>
+                </DockPanel>
+            </GroupBox>
+            <Label Name="MessageLabel"></Label>
+        </StackPanel>
+    </DockPanel>
+</Window>

@@ -144,6 +144,8 @@ namespace DomL.Business.Services
             }
         }
 
+        // Saving to the Database from File
+        // (Restoring from backed up data)
         public static void SaveFromBackupSegments(string[] backupSegments, Category category, UnitOfWork unitOfWork)
         {
             switch (category.Id) {

@@ -100,6 +100,10 @@ namespace DomL.Business.Services
             }
         }
 
+        //===============================================================
+        //===============================================================
+        //===============================================================
+
         public static void RestoreFromFile(string fileDir, int categoryId)
         {
             Category category;
@@ -149,6 +153,54 @@ namespace DomL.Business.Services
                 }
             }
         }
+
+        //===============================================================
+
+        public static void SaveMediaToDatabase(string fileDir, int categoryId)
+        {
+            Category category;
+            using (var unitOfWork = new UnitOfWork(new DomLContext()))
+            {
+                category = unitOfWork.ActivityRepo.GetCategoryById(categoryId);
+
+                unitOfWork.ActivityRepo.DeleteAllFromCategory(categoryId);
+                unitOfWork.Complete();
+
+                using (var reader = new StreamReader(fileDir + category.Name + ".txt"))
+                {
+                    string line = "";
+                    while ((line = reader.ReadLine()) != null)
+                    {
+                        if (string.IsNullOrWhiteSpace(line))
+                        {
+                            continue;
+                        }
+
+                        var backupSegments = Regex.Split(line, "\t");
+
+                        ActivityService.SaveFromBackupSegments(backupSegments, category, unitOfWork);
+                        unitOfWork.Complete();
+                    }
+                }
+            }
+        }
+
+        public static void GetMediaFromDatabase(string fileDir, int categoryId)
+        {
+            switch(categoryId)
+            {
+                case Category.BOOK_ID: BookService.SaveFromDatabaseToFile(fileDir); break;
+                case Category.COMIC_ID: ComicService.SaveFromDatabaseToFile(fileDir); break;
+                case Category.GAME_ID: GameService.SaveFromDatabaseToFile(fileDir); break;
+                case Category.MOVIE_ID: MovieService.SaveFromDatabaseToFile(fileDir); break;
+                case Category.SHOW_ID: ShowService.SaveFromDatabaseToFile(fileDir); break;
+                default: break;
+            }
+        }
+
+        //===============================================================
+        //===============================================================
+        //===============================================================
 
         /// <summary>
         /// Gets all activities for the specified month/year,

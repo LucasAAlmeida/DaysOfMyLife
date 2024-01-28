@@ -114,5 +114,29 @@ namespace DomL.Business.Services
                 && u.ComicActivity.Comic.Title == comic.Title
             );
         }
+
+        // Used to get information
+        // from the database into a file
+        // to be more easily manipulated
+        public static void SaveFromDatabaseToFile(string fileDir)
+        {
+            List<Comic> comics;
+            using (var unitOfWork = new UnitOfWork(new DomLContext()))
+            {
+                comics = unitOfWork.ComicRepo.GetAllComics();
+            }
+            var filePath = fileDir + "COMICS.txt";
+            using (var file = new StreamWriter(filePath))
+            {
+                foreach (var comic in comics)
+                {
+                    string comicString = comic.Id + "\t" + comic.Title
+                        + "\t" + comic.Series + "\t" + comic.Number
+                        + "\t" + comic.Person + "\t" + comic.Company
+                        + "\t" + comic.Year + "\t" + comic.Score;
+                    file.WriteLine(comicString);
+                }
+            }
+        }
     }
 }

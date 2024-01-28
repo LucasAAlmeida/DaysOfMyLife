@@ -128,5 +128,29 @@ namespace DomL.Business.Services
             }
             return unitOfWork.GameRepo.GetGameByTitle(title);
         }
+
+        // Used to get information
+        // from the database into a file
+        // to be more easily manipulated
+        public static void SaveFromDatabaseToFile(string fileDir)
+        {
+            List<Game> games;
+            using (var unitOfWork = new UnitOfWork(new DomLContext()))
+            {
+                games = unitOfWork.GameRepo.GetAllGames();
+            }
+            var filePath = fileDir + "GAMES.txt";
+            using (var file = new StreamWriter(filePath))
+            {
+                foreach (var game in games)
+                {
+                    string gameString = game.Id + "\t" + game.Title
+                        + "\t" + game.Series + "\t" + game.Number
+                        + "\t" + game.Person + "\t" + game.Company
+                        + "\t" + game.Year + "\t" + game.Score;
+                    file.WriteLine(gameString);
+                }
+            }
+        }
     }
 }

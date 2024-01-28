@@ -15,16 +15,19 @@
                             <Button Height="30" Width="80" Margin="5" Content="Auto" Click="AutoBackupButton_Click"/>
                             <Button Height="30" Width="80" Margin="5" Content="Book" Click="BookBackupButton_Click"/>
                             <Button Height="30" Width="80" Margin="5" Content="Comic" Click="ComicBackupButton_Click"/>
+                            <Button Height="30" Width="80" Margin="5" Content="Course" Click="CourseBackupButton_Click"/>
                             <Button Height="30" Width="80" Margin="5" Content="Doom" Click="DoomBackupButton_Click"/>
                             <Button Height="30" Width="80" Margin="5" Content="Event" Click="EventBackupButton_Click"/>
+                        </StackPanel>
+                        <StackPanel Orientation="Horizontal">
                             <Button Height="30" Width="80" Margin="5" Content="Game" Click="GameBackupButton_Click"/>
                             <Button Height="30" Width="80" Margin="5" Content="Gift" Click="GiftBackupButton_Click"/>
                             <Button Height="30" Width="80" Margin="5" Content="Health" Click="HealthBackupButton_Click"/>
-                        </StackPanel>
-                        <StackPanel Orientation="Horizontal">
                             <Button Height="30" Width="80" Margin="5" Content="Meet" Click="MeetBackupButton_Click"/>
                             <Button Height="30" Width="80" Margin="5" Content="Movie" Click="MovieBackupButton_Click"/>
                             <Button Height="30" Width="80" Margin="5" Content="Pet" Click="PetBackupButton_Click"/>
+                        </StackPanel>
+                        <StackPanel Orientation="Horizontal">
                             <Button Height="30" Width="80" Margin="5" Content="Play" Click="PlayBackupButton_Click"/>
                             <Button Height="30" Width="80" Margin="5" Content="Purchase" Click="PurchaseBackupButton_Click"/>
                             <Button Height="30" Width="80" Margin="5" Content="Show" Click="ShowBackupButton_Click"/>
@@ -34,8 +37,37 @@
                     </StackPanel>
                 </DockPanel>
             </GroupBox>
+            <GroupBox Header="Restore">
+                <DockPanel>
+                    <StackPanel>
+                        <Button Height="30" Width="80" Margin="5" Content="All" Click="AllRestoreButton_Click"/>
+                        <StackPanel Orientation="Horizontal">
+                            <Button Height="30" Width="80" Margin="5" Content="Auto" Click="AutoRestoreButton_Click"/>
+                            <Button Height="30" Width="80" Margin="5" Content="Book" Click="BookRestoreButton_Click"/>
+                            <Button Height="30" Width="80" Margin="5" Content="Comic" Click="ComicRestoreButton_Click"/>
+                            <Button Height="30" Width="80" Margin="5" Content="Course" Click="CourseRestoreButton_Click"/>
+                            <Button Height="30" Width="80" Margin="5" Content="Doom" Click="DoomRestoreButton_Click"/>
+                            <Button Height="30" Width="80" Margin="5" Content="Event" Click="EventRestoreButton_Click"/>
+                        </StackPanel>
+                        <StackPanel Orientation="Horizontal">
+                            <Button Height="30" Width="80" Margin="5" Content="Game" Click="GameRestoreButton_Click"/>
+                            <Button Height="30" Width="80" Margin="5" Content="Gift" Click="GiftRestoreButton_Click"/>
+                            <Button Height="30" Width="80" Margin="5" Content="Health" Click="HealthRestoreButton_Click"/>
+                            <Button Height="30" Width="80" Margin="5" Content="Meet" Click="MeetRestoreButton_Click"/>
+                            <Button Height="30" Width="80" Margin="5" Content="Movie" Click="MovieRestoreButton_Click"/>
+                            <Button Height="30" Width="80" Margin="5" Content="Pet" Click="PetRestoreButton_Click"/>
+                        </StackPanel>
+                        <StackPanel Orientation="Horizontal">
+                            <Button Height="30" Width="80" Margin="5" Content="Play" Click="PlayRestoreButton_Click"/>
+                            <Button Height="30" Width="80" Margin="5" Content="Purchase" Click="PurchaseRestoreButton_Click"/>
+                            <Button Height="30" Width="80" Margin="5" Content="Show" Click="ShowRestoreButton_Click"/>
+                            <Button Height="30" Width="80" Margin="5" Content="Travel" Click="TravelRestoreButton_Click"/>
+                            <Button Height="30" Width="80" Margin="5" Content="Work" Click="WorkRestoreButton_Click"/>
+                        </StackPanel>
+                    </StackPanel>
+                </DockPanel>
+            </GroupBox>
             <Label Name="MessageLabel"></Label>
         </StackPanel>
-        
     </DockPanel>
 </Window>

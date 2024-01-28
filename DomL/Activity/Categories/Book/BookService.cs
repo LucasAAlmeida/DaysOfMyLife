@@ -111,5 +111,29 @@ namespace DomL.Business.Services
                 && u.BookActivity.Book.Title == book.Title
             );
         }
+
+        // Used to get information
+        // from the database into a file
+        // to be more easily manipulated
+        public static void SaveFromDatabaseToFile(string fileDir)
+        {
+            List<Book> books;
+            using (var unitOfWork = new UnitOfWork(new DomLContext()))
+            {
+                books = unitOfWork.BookRepo.GetAllBooks();
+            }
+            var filePath = fileDir + "BOOKS.txt";
+            using (var file = new StreamWriter(filePath))
+            {
+                foreach (var book in books)
+                {
+                    string bookString = book.Id + "\t" + book.Title
+                        + "\t" + book.Series + "\t" + book.Number
+                        + "\t" + book.Person + "\t" + book.Company
+                        + "\t" + book.Year + "\t" + book.Score;
+                    file.WriteLine(bookString);
+                }
+            }
+        }
     }
 }

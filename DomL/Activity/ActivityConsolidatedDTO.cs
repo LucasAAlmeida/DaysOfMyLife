@@ -39,6 +39,8 @@ namespace DomL.Business.DTOs
             }
         }
 
+        // This is to restore data to the database from a previous backup
+        // This should be in the same order than the GetInfoForBackup() method
         public ActivityConsolidatedDTO(string[] segments)
         {
             Date = segments[0];
@@ -68,7 +70,8 @@ namespace DomL.Business.DTOs
 
         protected string GetInfoForBackup()
         {
-            return Date + "\t" + DayOrder + "\t" + Block + "\t" + StatusName;
+            //      0               1                   2                   3                   4
+            return Date + "\t" + DayOrder + "\t" + CategoryName + "\t" + StatusName + "\t" + Block;
         }
     }
 }

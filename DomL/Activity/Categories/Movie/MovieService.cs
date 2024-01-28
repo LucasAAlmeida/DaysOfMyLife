@@ -110,5 +110,29 @@ namespace DomL.Business.Services
                 && u.MovieActivity.Movie.Title == movie.Title
             );
         }
+
+        // Used to get information
+        // from the database into a file
+        // to be more easily manipulated
+        public static void SaveFromDatabaseToFile(string fileDir)
+        {
+            List<Movie> movies;
+            using (var unitOfWork = new UnitOfWork(new DomLContext()))
+            {
+                movies = unitOfWork.MovieRepo.GetAllMovies();
+            }
+            var filePath = fileDir + "MOVIES.txt";
+            using (var file = new StreamWriter(filePath))
+            {
+                foreach (var movie in movies)
+                {
+                    string movieString = movie.Id + "\t" + movie.Title
+                        + "\t" + movie.Series + "\t" + movie.Number
+                        + "\t" + movie.Person + "\t" + movie.Company
+                        + "\t" + movie.Year + "\t" + movie.Score;
+                    file.WriteLine(movieString);
+                }
+            }
+        }
     }
 }

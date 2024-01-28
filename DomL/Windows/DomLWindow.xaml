@@ -12,7 +12,7 @@
             </MenuItem>
             <MenuItem Header="_View">
                 <MenuItem Header="_Backup Full" Click="MenuViewBackupFull_Click" />
-                <MenuItem Header="_Restore Full" Click="MenuViewRestoreFull_Click" />
+                <MenuItem Header="_Media" Click="MenuViewMedia_Click" />
             </MenuItem>
         </Menu>
         <Grid Margin="10">

@@ -125,5 +125,29 @@ namespace DomL.Business.Services
                 && u.ShowActivity.Show.Series == showSeason.Series && u.ShowActivity.Show.Title == showSeason.Title
             );
         }
+
+        // Used to get information
+        // from the database into a file
+        // to be more easily manipulated
+        public static void SaveFromDatabaseToFile(string fileDir)
+        {
+            List<Show> shows;
+            using (var unitOfWork = new UnitOfWork(new DomLContext()))
+            {
+                shows = unitOfWork.ShowRepo.GetAllShows();
+            }
+            var filePath = fileDir + "SHOWS.txt";
+            using (var file = new StreamWriter(filePath))
+            {
+                foreach (var show in shows)
+                {
+                    string showString = show.Id + "\t" + show.Title
+                        + "\t" + show.Series + "\t" + show.Number
+                        + "\t" + show.Person + "\t" + show.Company
+                        + "\t" + show.Year + "\t" + show.Score;
+                    file.WriteLine(showString);
+                }
+            }
+        }
     }
 }
