@@ -156,8 +156,31 @@ namespace DomL.Business.Services
 
         //===============================================================
 
-        public static void SaveMediaToDatabase(string fileDir, int categoryId)
+        public static void SaveMediaFromDatabaseToFile(string fileDir, int categoryId)
         {
+            switch (categoryId)
+            {
+                case Category.BOOK_ID: BookService.SaveFromDatabaseToFile(fileDir); break;
+                case Category.COMIC_ID: ComicService.SaveFromDatabaseToFile(fileDir); break;
+                case Category.GAME_ID: GameService.SaveFromDatabaseToFile(fileDir); break;
+                case Category.MOVIE_ID: MovieService.SaveFromDatabaseToFile(fileDir); break;
+                case Category.SHOW_ID: ShowService.SaveFromDatabaseToFile(fileDir); break;
+                default: break;
+            }
+        }
+
+        public static void SaveMediaFromFileToDatabase(string fileDir, int categoryId)
+        {
+            switch (categoryId)
+            {
+                case Category.BOOK_ID: BookService.SaveMediaFromFileToDatabase(fileDir); break;
+                //case Category.COMIC_ID: ComicService.SaveMediaFromFileToDatabase(fileDir); break;
+                //case Category.GAME_ID: GameService.SaveMediaFromFileToDatabase(fileDir); break;
+                //case Category.MOVIE_ID: MovieService.SaveMediaFromFileToDatabase(fileDir); break;
+                //case Category.SHOW_ID: ShowService.SaveMediaFromFileToDatabase(fileDir); break;
+                default: break;
+            }
+
             Category category;
             using (var unitOfWork = new UnitOfWork(new DomLContext()))
             {
@@ -182,19 +205,6 @@ namespace DomL.Business.Services
                         unitOfWork.Complete();
                     }
                 }
-            }
-        }
-
-        public static void GetMediaFromDatabase(string fileDir, int categoryId)
-        {
-            switch(categoryId)
-            {
-                case Category.BOOK_ID: BookService.SaveFromDatabaseToFile(fileDir); break;
-                case Category.COMIC_ID: ComicService.SaveFromDatabaseToFile(fileDir); break;
-                case Category.GAME_ID: GameService.SaveFromDatabaseToFile(fileDir); break;
-                case Category.MOVIE_ID: MovieService.SaveFromDatabaseToFile(fileDir); break;
-                case Category.SHOW_ID: ShowService.SaveFromDatabaseToFile(fileDir); break;
-                default: break;
             }
         }
 

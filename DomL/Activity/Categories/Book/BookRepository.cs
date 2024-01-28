@@ -1,7 +1,6 @@
 ﻿using DomL.Business.Entities;
 using DomL.Business.Utils;
 using System.Linq;
-using System.Data.Entity;
 using System.Collections.Generic;
 
 namespace DomL.DataAccess
@@ -38,6 +37,11 @@ namespace DomL.DataAccess
         public List<Book> GetAllBooks()
         {
             return DomLContext.Book.ToList();
+        }
+
+        public Book GetBookFromId(int bookId)
+        {
+            return DomLContext.Book.SingleOrDefault(e => e.Id == bookId);
         }
     }
 }

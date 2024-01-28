@@ -135,5 +135,33 @@ namespace DomL.Business.Services
                 }
             }
         }
+
+        // Used to save information
+        // from a file into the database
+        public static void SaveMediaFromFileToDatabase(string fileDir)
+        {
+            using (var unitOfWork = new UnitOfWork(new DomLContext()))
+            {
+                using (var reader = new StreamReader(fileDir + "BOOKS.txt"))
+                {
+                    string line = "";
+                    while ((line = reader.ReadLine()) != null)
+                    {
+                        var bookInfo = Regex.Split(line, "\t");
+                        var book = unitOfWork.BookRepo.GetBookFromId(int.Parse(bookInfo[0]));
+
+                        book.Title = bookInfo[1];
+                        book.Series = bookInfo[2];
+                        book.Number = bookInfo[3];
+                        book.Person = bookInfo[4];
+                        book.Company = bookInfo[5];
+                        book.Year = bookInfo[6];
+                        book.Score = bookInfo[7];
+
+                        unitOfWork.Complete();
+                    }
+                }
+            }
+        }
     }
 }

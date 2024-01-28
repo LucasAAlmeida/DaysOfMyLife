@@ -7,16 +7,16 @@
         Title="Media Window" Height="450" Width="800">
     <DockPanel>
         <StackPanel>
-            <GroupBox Header="Get Media from Database">
+            <GroupBox Header="Save Media from Database To File">
                 <DockPanel>
                     <StackPanel>
-                        <Button Height="30" Width="80" Margin="5" Content="All" Click="GetAllMediaFromDatabaseButton_Click"/>
+                        <Button Height="30" Width="80" Margin="5" Content="All" Click="SaveAllMediaFromDatabaseToFileButton_Click"/>
                         <StackPanel Orientation="Horizontal">
-                            <Button Height="30" Width="80" Margin="5" Content="Book" Click="GetBooksFromDatabaseButton_Click"/>
-                            <Button Height="30" Width="80" Margin="5" Content="Comic" Click="GetComicsFromDatabaseButton_Click"/>
-                            <Button Height="30" Width="80" Margin="5" Content="Game" Click="GetGamesFromDatabaseButton_Click"/>
-                            <Button Height="30" Width="80" Margin="5" Content="Movie" Click="GetMoviesFromDatabaseButton_Click"/>
-                            <Button Height="30" Width="80" Margin="5" Content="Show" Click="GetShowsFromDatabaseButton_Click"/>
+                            <Button Height="30" Width="80" Margin="5" Content="Book" Click="SaveBooksFromDatabaseToFileButton_Click"/>
+                            <Button Height="30" Width="80" Margin="5" Content="Comic" Click="SaveComicsFromDatabaseToFileButton_Click"/>
+                            <Button Height="30" Width="80" Margin="5" Content="Game" Click="SaveGamesFromDatabaseToFileButton_Click"/>
+                            <Button Height="30" Width="80" Margin="5" Content="Movie" Click="SaveMoviesFromDatabaseToFileButton_Click"/>
+                            <Button Height="30" Width="80" Margin="5" Content="Show" Click="SaveShowsFromDatabaseToFileButton_Click"/>
                         </StackPanel>
                     </StackPanel>
                 </DockPanel>

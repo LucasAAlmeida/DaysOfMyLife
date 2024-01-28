@@ -24,40 +24,44 @@ namespace DomL.Presentation
             InitializeComponent();
         }
 
-        private void GetAllMediaFromDatabaseButton_Click(object sender, RoutedEventArgs e)
+        private void SaveAllMediaFromDatabaseToFileButton_Click(object sender, RoutedEventArgs e)
         {
-
+            this.SaveBooksFromDatabaseToFileButton_Click(sender, e);
+            this.SaveComicsFromDatabaseToFileButton_Click(sender, e);
+            this.SaveGamesFromDatabaseToFileButton_Click(sender, e);
+            this.SaveMoviesFromDatabaseToFileButton_Click(sender, e);
+            this.SaveShowsFromDatabaseToFileButton_Click(sender, e);
         }
 
-        private void GetBooksFromDatabaseButton_Click(object sender, RoutedEventArgs e)
+        private void SaveBooksFromDatabaseToFileButton_Click(object sender, RoutedEventArgs e)
         {
-            DomLServices.RestoreFromFile(MEDIA_DIR_PATH, Category.BOOK_ID);
-            //MessageBox.Show(((Button)sender).Content + " Funcionou!");
+            DomLServices.SaveMediaFromDatabaseToFile(MEDIA_DIR_PATH, Category.BOOK_ID);
+            MessageBox.Show(((Button)sender).Content + " Funcionou!");
         }
 
-        private void GetComicsFromDatabaseButton_Click(object sender, RoutedEventArgs e)
+        private void SaveComicsFromDatabaseToFileButton_Click(object sender, RoutedEventArgs e)
         {
-            //DomLServices.RestoreFromFile(BACKUP_DIR_PATH, Category.COMIC_ID);
-            //MessageBox.Show(((Button)sender).Content + " Funcionou!");
+            DomLServices.SaveMediaFromDatabaseToFile(MEDIA_DIR_PATH, Category.COMIC_ID);
+            MessageBox.Show(((Button)sender).Content + " Funcionou!");
         }
 
-        private void GetGamesFromDatabaseButton_Click(object sender, RoutedEventArgs e)
+        private void SaveGamesFromDatabaseToFileButton_Click(object sender, RoutedEventArgs e)
         {
-            //DomLServices.RestoreFromFile(BACKUP_DIR_PATH, Category.GAME_ID);
-            //MessageBox.Show(((Button)sender).Content + " Funcionou!");
+            DomLServices.SaveMediaFromDatabaseToFile(MEDIA_DIR_PATH, Category.GAME_ID);
+            MessageBox.Show(((Button)sender).Content + " Funcionou!");
         }
 
 
-        private void GetMoviesFromDatabaseButton_Click(object sender, RoutedEventArgs e)
+        private void SaveMoviesFromDatabaseToFileButton_Click(object sender, RoutedEventArgs e)
         {
-            //DomLServices.RestoreFromFile(BACKUP_DIR_PATH, Category.MOVIE_ID);
-            //MessageBox.Show(((Button)sender).Content + " Funcionou!");
+            DomLServices.SaveMediaFromDatabaseToFile(MEDIA_DIR_PATH, Category.MOVIE_ID);
+            MessageBox.Show(((Button)sender).Content + " Funcionou!");
         }
 
-        private void GetShowsFromDatabaseButton_Click(object sender, RoutedEventArgs e)
+        private void SaveShowsFromDatabaseToFileButton_Click(object sender, RoutedEventArgs e)
         {
-                //DomLServices.RestoreFromFile(BACKUP_DIR_PATH, Category.SHOW_ID);
-                //MessageBox.Show(((Button)sender).Content + " Funcionou!");
+            DomLServices.SaveMediaFromDatabaseToFile(MEDIA_DIR_PATH, Category.SHOW_ID);
+            MessageBox.Show(((Button)sender).Content + " Funcionou!");
         }
 
         //===================================================================================
@@ -71,8 +75,8 @@ namespace DomL.Presentation
 
         private void SaveBooksToDatabaseButton_Click(object sender, RoutedEventArgs e)
         {
-            //DomLServices.RestoreFromFile(BACKUP_DIR_PATH, Category.BOOK_ID);
-            //MessageBox.Show(((Button)sender).Content + " Funcionou!");
+            DomLServices.SaveMediaFromFileToDatabase(MEDIA_DIR_PATH, Category.BOOK_ID);
+            MessageBox.Show(((Button)sender).Content + " Funcionou!");
         }
 
         private void SaveComicsToDatabaseButton_Click(object sender, RoutedEventArgs e)
