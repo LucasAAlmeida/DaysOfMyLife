@@ -39,9 +39,14 @@ namespace DomL.DataAccess
             return DomLContext.Book.ToList();
         }
 
-        public Book GetBookFromId(int bookId)
+        public Book GetBookOfId(int bookId)
         {
             return DomLContext.Book.SingleOrDefault(e => e.Id == bookId);
+        }
+
+        public void RemoveBook(Book book)
+        {
+            DomLContext.Book.Remove(book);
         }
     }
 }

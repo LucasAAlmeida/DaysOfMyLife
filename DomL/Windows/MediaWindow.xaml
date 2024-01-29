@@ -7,7 +7,7 @@
         Title="Media Window" Height="450" Width="800">
     <DockPanel>
         <StackPanel>
-            <GroupBox Header="Save Media from Database To File">
+            <GroupBox Header="Save Media From Database To File">
                 <DockPanel>
                     <StackPanel>
                         <Button Height="30" Width="80" Margin="5" Content="All" Click="SaveAllMediaFromDatabaseToFileButton_Click"/>
@@ -21,7 +21,7 @@
                     </StackPanel>
                 </DockPanel>
             </GroupBox>
-            <GroupBox Header="Save Media to Database">
+            <GroupBox Header="Save Media From File To Database">
                 <DockPanel>
                     <StackPanel>
                         <Button Height="30" Width="80" Margin="5" Content="All" Click="SaveAllMediaToDatabaseButton_Click"/>

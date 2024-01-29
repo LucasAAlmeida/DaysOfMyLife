@@ -104,7 +104,7 @@ namespace DomL.Business.Services
         //===============================================================
         //===============================================================
 
-        public static void RestoreFromFile(string fileDir, int categoryId)
+        public static void RestoreFromFileToDatabase(string fileDir, int categoryId)
         {
             Category category;
             using (var unitOfWork = new UnitOfWork(new DomLContext())) {
@@ -129,7 +129,7 @@ namespace DomL.Business.Services
             }
         }
 
-        public static void BackupToFile(string fileDir, int categoryId)
+        public static void BackupFromDatabaseToFile(string fileDir, int categoryId)
         {
             List<Activity> activities;
             Category category;
@@ -156,11 +156,12 @@ namespace DomL.Business.Services
 
         //===============================================================
 
+        // Saves Media Info that is in the Database into a File
         public static void SaveMediaFromDatabaseToFile(string fileDir, int categoryId)
         {
             switch (categoryId)
             {
-                case Category.BOOK_ID: BookService.SaveFromDatabaseToFile(fileDir); break;
+                case Category.BOOK_ID: BookService.SaveMediaFromDatabaseToFile(fileDir); break;
                 case Category.COMIC_ID: ComicService.SaveFromDatabaseToFile(fileDir); break;
                 case Category.GAME_ID: GameService.SaveFromDatabaseToFile(fileDir); break;
                 case Category.MOVIE_ID: MovieService.SaveFromDatabaseToFile(fileDir); break;
@@ -169,6 +170,7 @@ namespace DomL.Business.Services
             }
         }
 
+        // Saves Media Info that is in a File into the Database
         public static void SaveMediaFromFileToDatabase(string fileDir, int categoryId)
         {
             switch (categoryId)
@@ -179,32 +181,6 @@ namespace DomL.Business.Services
                 //case Category.MOVIE_ID: MovieService.SaveMediaFromFileToDatabase(fileDir); break;
                 //case Category.SHOW_ID: ShowService.SaveMediaFromFileToDatabase(fileDir); break;
                 default: break;
-            }
-
-            Category category;
-            using (var unitOfWork = new UnitOfWork(new DomLContext()))
-            {
-                category = unitOfWork.ActivityRepo.GetCategoryById(categoryId);
-
-                unitOfWork.ActivityRepo.DeleteAllFromCategory(categoryId);
-                unitOfWork.Complete();
-
-                using (var reader = new StreamReader(fileDir + category.Name + ".txt"))
-                {
-                    string line = "";
-                    while ((line = reader.ReadLine()) != null)
-                    {
-                        if (string.IsNullOrWhiteSpace(line))
-                        {
-                            continue;
-                        }
-
-                        var backupSegments = Regex.Split(line, "\t");
-
-                        ActivityService.SaveFromBackupSegments(backupSegments, category, unitOfWork);
-                        unitOfWork.Complete();
-                    }
-                }
             }
         }
 

@@ -115,7 +115,7 @@ namespace DomL.Business.Services
         // Used to get information
         // from the database into a file
         // to be more easily manipulated
-        public static void SaveFromDatabaseToFile(string fileDir)
+        public static void SaveMediaFromDatabaseToFile(string fileDir)
         {
             List<Book> books;
             using (var unitOfWork = new UnitOfWork(new DomLContext()))
@@ -148,15 +148,34 @@ namespace DomL.Business.Services
                     while ((line = reader.ReadLine()) != null)
                     {
                         var bookInfo = Regex.Split(line, "\t");
-                        var book = unitOfWork.BookRepo.GetBookFromId(int.Parse(bookInfo[0]));
+                        int bookId = int.Parse(bookInfo[0]);
+                        var book = unitOfWork.BookRepo.GetBookOfId(bookId);
 
-                        book.Title = bookInfo[1];
-                        book.Series = bookInfo[2];
-                        book.Number = bookInfo[3];
-                        book.Person = bookInfo[4];
-                        book.Company = bookInfo[5];
-                        book.Year = bookInfo[6];
-                        book.Score = bookInfo[7];
+                        if (book == null) { continue; }
+
+                        var correctId = bookInfo[8];
+                        if (string.IsNullOrWhiteSpace(correctId))
+                        {
+                            book.Title = bookInfo[1];
+                            book.Series = bookInfo[2];
+                            book.Number = bookInfo[3];
+                            book.Person = bookInfo[4];
+                            book.Company = bookInfo[5];
+                            book.Year = bookInfo[6];
+                            book.Score = bookInfo[7];
+                        }
+                        else
+                        {
+                            // If this field is filled, that means that the info on this line is duplicated,
+                            // and that we should update all records that point to this media to actually point to the given `correctId`
+                            var bookActivityList = unitOfWork.BookRepo.Find(b => b.BookId == bookId);
+                            var correctBookId = int.Parse(correctId);
+                            foreach (var bookActivity in bookActivityList)
+                            {
+                                bookActivity.BookId = correctBookId;
+                            }
+                            unitOfWork.BookRepo.RemoveBook(book);
+                        }
 
                         unitOfWork.Complete();
                     }
