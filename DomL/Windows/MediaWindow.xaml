@@ -26,11 +26,11 @@
                     <StackPanel>
                         <Button Height="30" Width="80" Margin="5" Content="All" Click="SaveAllMediaToDatabaseButton_Click"/>
                         <StackPanel Orientation="Horizontal">
-                            <Button Height="30" Width="80" Margin="5" Content="Book" Click="SaveBooksToDatabaseButton_Click"/>
-                            <Button Height="30" Width="80" Margin="5" Content="Comic" Click="SaveComicsToDatabaseButton_Click"/>
-                            <Button Height="30" Width="80" Margin="5" Content="Game" Click="SaveGamesToDatabaseButton_Click"/>
-                            <Button Height="30" Width="80" Margin="5" Content="Movie" Click="SaveMoviesToDatabaseButton_Click"/>
-                            <Button Height="30" Width="80" Margin="5" Content="Show" Click="SaveShowsToDatabaseButton_Click"/>
+                            <Button Height="30" Width="80" Margin="5" Content="Book" Click="SaveBooksFromFileToDatabaseButton_Click"/>
+                            <Button Height="30" Width="80" Margin="5" Content="Comic" Click="SaveComicsFromFileToDatabaseButton_Click"/>
+                            <Button Height="30" Width="80" Margin="5" Content="Game" Click="SaveGamesFromFileToDatabaseButton_Click"/>
+                            <Button Height="30" Width="80" Margin="5" Content="Movie" Click="SaveMoviesFromFileToDatabaseButton_Click"/>
+                            <Button Height="30" Width="80" Margin="5" Content="Show" Click="SaveShowsFromFileToDatabaseButton_Click"/>
                         </StackPanel>
                     </StackPanel>
                 </DockPanel>

@@ -162,7 +162,7 @@ namespace DomL.Business.Services
             switch (categoryId)
             {
                 case Category.BOOK_ID: BookService.SaveMediaFromDatabaseToFile(fileDir); break;
-                case Category.COMIC_ID: ComicService.SaveFromDatabaseToFile(fileDir); break;
+                case Category.COMIC_ID: ComicService.SaveMediaFromDatabaseToFile(fileDir); break;
                 case Category.GAME_ID: GameService.SaveFromDatabaseToFile(fileDir); break;
                 case Category.MOVIE_ID: MovieService.SaveFromDatabaseToFile(fileDir); break;
                 case Category.SHOW_ID: ShowService.SaveFromDatabaseToFile(fileDir); break;
@@ -176,7 +176,7 @@ namespace DomL.Business.Services
             switch (categoryId)
             {
                 case Category.BOOK_ID: BookService.SaveMediaFromFileToDatabase(fileDir); break;
-                //case Category.COMIC_ID: ComicService.SaveMediaFromFileToDatabase(fileDir); break;
+                case Category.COMIC_ID: ComicService.SaveMediaFromFileToDatabase(fileDir); break;
                 //case Category.GAME_ID: GameService.SaveMediaFromFileToDatabase(fileDir); break;
                 //case Category.MOVIE_ID: MovieService.SaveMediaFromFileToDatabase(fileDir); break;
                 //case Category.SHOW_ID: ShowService.SaveMediaFromFileToDatabase(fileDir); break;

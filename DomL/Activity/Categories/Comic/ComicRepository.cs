@@ -35,5 +35,15 @@ namespace DomL.DataAccess
         {
             return DomLContext.Comic.ToList();
         }
+
+        public Comic GetComicOfId(int comicId)
+        {
+            return DomLContext.Comic.SingleOrDefault(e => e.Id == comicId);
+        }
+
+        public void RemoveComic(Comic comic)
+        {
+            DomLContext.Comic.Remove(comic);
+        }
     }
 }

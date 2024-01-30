@@ -27,7 +27,7 @@
                         <ColumnDefinition />
                     </Grid.ColumnDefinitions>
                     <StackPanel Grid.Column="0" Margin="5">
-                        <Label Content="Mês"/>
+                        <Label Content="Mês (January = 1)"/>
                         <TextBox Name="MonthTb"/>
                     </StackPanel>
                     <StackPanel Grid.Column="1" Margin="5">

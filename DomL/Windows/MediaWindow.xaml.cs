@@ -70,35 +70,39 @@ namespace DomL.Presentation
 
         private void SaveAllMediaToDatabaseButton_Click(object sender, RoutedEventArgs e)
         {
-
+            this.SaveBooksFromFileToDatabaseButton_Click(sender, e);
+            this.SaveComicsFromFileToDatabaseButton_Click(sender, e);
+            this.SaveGamesFromFileToDatabaseButton_Click(sender, e);
+            this.SaveMoviesFromFileToDatabaseButton_Click(sender, e);
+            this.SaveShowsFromFileToDatabaseButton_Click(sender, e);
         }
 
-        private void SaveBooksToDatabaseButton_Click(object sender, RoutedEventArgs e)
+        private void SaveBooksFromFileToDatabaseButton_Click(object sender, RoutedEventArgs e)
         {
             DomLServices.SaveMediaFromFileToDatabase(MEDIA_DIR_PATH, Category.BOOK_ID);
             MessageBox.Show(((Button)sender).Content + " Funcionou!");
         }
 
-        private void SaveComicsToDatabaseButton_Click(object sender, RoutedEventArgs e)
+        private void SaveComicsFromFileToDatabaseButton_Click(object sender, RoutedEventArgs e)
         {
-            //DomLServices.RestoreFromFile(BACKUP_DIR_PATH, Category.COMIC_ID);
-            //MessageBox.Show(((Button)sender).Content + " Funcionou!");
+            DomLServices.SaveMediaFromFileToDatabase(MEDIA_DIR_PATH, Category.COMIC_ID);
+            MessageBox.Show(((Button)sender).Content + " Funcionou!");
         }
 
-        private void SaveGamesToDatabaseButton_Click(object sender, RoutedEventArgs e)
+        private void SaveGamesFromFileToDatabaseButton_Click(object sender, RoutedEventArgs e)
         {
             //DomLServices.RestoreFromFile(BACKUP_DIR_PATH, Category.GAME_ID);
             //MessageBox.Show(((Button)sender).Content + " Funcionou!");
         }
 
         
-        private void SaveMoviesToDatabaseButton_Click(object sender, RoutedEventArgs e)
+        private void SaveMoviesFromFileToDatabaseButton_Click(object sender, RoutedEventArgs e)
         {
             //DomLServices.RestoreFromFile(BACKUP_DIR_PATH, Category.MOVIE_ID);
             //MessageBox.Show(((Button)sender).Content + " Funcionou!");
         }
         
-        private void SaveShowsToDatabaseButton_Click(object sender, RoutedEventArgs e)
+        private void SaveShowsFromFileToDatabaseButton_Click(object sender, RoutedEventArgs e)
         {
                 //DomLServices.RestoreFromFile(BACKUP_DIR_PATH, Category.SHOW_ID);
                 //MessageBox.Show(((Button)sender).Content + " Funcionou!");
