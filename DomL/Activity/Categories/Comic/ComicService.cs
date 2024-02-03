@@ -155,7 +155,11 @@ namespace DomL.Business.Services
                         int comicId = int.Parse(comicInfo[0]);
                         var comic = unitOfWork.ComicRepo.GetComicOfId(comicId);
 
-                        if (comic == null) { continue; }
+                        if (comic == null)
+                        {
+                            comic = new Comic();
+                            comic.Id = comicId;
+                        }
 
                         var correctId = comicInfo[9];
                         if (string.IsNullOrWhiteSpace(correctId))

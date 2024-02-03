@@ -91,21 +91,21 @@ namespace DomL.Presentation
 
         private void SaveGamesFromFileToDatabaseButton_Click(object sender, RoutedEventArgs e)
         {
-            //DomLServices.RestoreFromFile(BACKUP_DIR_PATH, Category.GAME_ID);
-            //MessageBox.Show(((Button)sender).Content + " Funcionou!");
+            DomLServices.SaveMediaFromFileToDatabase(MEDIA_DIR_PATH, Category.GAME_ID);
+            MessageBox.Show(((Button)sender).Content + " Funcionou!");
         }
 
         
         private void SaveMoviesFromFileToDatabaseButton_Click(object sender, RoutedEventArgs e)
         {
-            //DomLServices.RestoreFromFile(BACKUP_DIR_PATH, Category.MOVIE_ID);
-            //MessageBox.Show(((Button)sender).Content + " Funcionou!");
+            DomLServices.SaveMediaFromFileToDatabase(MEDIA_DIR_PATH, Category.MOVIE_ID);
+            MessageBox.Show(((Button)sender).Content + " Funcionou!");
         }
         
         private void SaveShowsFromFileToDatabaseButton_Click(object sender, RoutedEventArgs e)
         {
-                //DomLServices.RestoreFromFile(BACKUP_DIR_PATH, Category.SHOW_ID);
-                //MessageBox.Show(((Button)sender).Content + " Funcionou!");
+            DomLServices.SaveMediaFromFileToDatabase(MEDIA_DIR_PATH, Category.SHOW_ID);
+            MessageBox.Show(((Button)sender).Content + " Funcionou!");
         }
     }
 }

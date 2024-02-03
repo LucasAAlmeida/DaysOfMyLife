@@ -150,7 +150,11 @@ namespace DomL.Business.Services
                         int bookId = int.Parse(bookInfo[0]);
                         var book = unitOfWork.BookRepo.GetBookOfId(bookId);
 
-                        if (book == null) { continue; }
+                        if (book == null)
+                        {
+                            book = new Book();
+                            book.Id = bookId;
+                        }
 
                         var correctId = bookInfo[8];
                         if (string.IsNullOrWhiteSpace(correctId))

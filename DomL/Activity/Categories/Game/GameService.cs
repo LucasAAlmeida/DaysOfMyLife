@@ -132,7 +132,7 @@ namespace DomL.Business.Services
         // Used to get information
         // from the database into a file
         // to be more easily manipulated
-        public static void SaveFromDatabaseToFile(string fileDir)
+        public static void SaveMediaFromDatabaseToFile(string fileDir)
         {
             List<Game> games;
             using (var unitOfWork = new UnitOfWork(new DomLContext()))
@@ -144,13 +144,93 @@ namespace DomL.Business.Services
             {
                 foreach (var game in games)
                 {
-                    string gameString = game.Id + "\t" + game.Title
+                    string gameString = game.Id
+                        + "\t" + game.Title + "\t" + game.Type
                         + "\t" + game.Series + "\t" + game.Number
                         + "\t" + game.Person + "\t" + game.Company
                         + "\t" + game.Year + "\t" + game.Score;
                     file.WriteLine(gameString);
                 }
             }
+        }
+
+        // Used to save information
+        // from a file into the database
+        public static void SaveMediaFromFileToDatabase(string fileDir)
+        {
+            using (var unitOfWork = new UnitOfWork(new DomLContext()))
+            {
+                using (var reader = new StreamReader(fileDir + "GAMES.txt"))
+                {
+                    string line = "";
+                    while ((line = reader.ReadLine()) != null)
+                    {
+                        var gameInfo = Regex.Split(line, "\t");
+                        var gameId = 0;
+                        var gameExists = int.TryParse(gameInfo[0], out gameId);
+
+                        var correctId = gameInfo[9];
+                        if (!string.IsNullOrWhiteSpace(correctId))
+                        {
+                            FixDuplicatedMedia(unitOfWork, gameId, correctId);
+                            continue;
+                        }
+
+                        if (!gameExists)
+                        {
+                            CreateMedia(unitOfWork, gameInfo);
+                            continue;
+                        }
+
+                        UpdateExistingMedia(unitOfWork, gameId, gameInfo);
+                    }
+
+                    unitOfWork.Complete();
+                }
+            }
+        }
+
+        /// <summary>
+        /// The game record of id `gameId` is a duplicate of the game record of id `correctId`
+        /// we should update all records that point to `gameId` to actually point to `correctId`
+        /// </summary>
+        /// <param name="unitOfWork"></param>
+        /// <param name="gameId"></param>
+        /// <param name="correctId"></param>
+        private static void FixDuplicatedMedia(UnitOfWork unitOfWork, int gameId, string correctId)
+        {
+            var gameActivityList = unitOfWork.GameRepo.Find(b => b.GameId == gameId);
+            var correctGameId = int.Parse(correctId);
+            foreach (var gameActivity in gameActivityList)
+            {
+                gameActivity.GameId = correctGameId;
+            }
+            unitOfWork.GameRepo.RemoveGameOfId(gameId);
+        }
+
+        private static void CreateMedia(UnitOfWork unitOfWork, string[] gameInfo)
+        {
+            var game = new Game();
+            FillGameData(game, gameInfo);
+            unitOfWork.GameRepo.CreateGame(game);
+        }
+
+        private static void UpdateExistingMedia(UnitOfWork unitOfWork, int gameId, string[] gameInfo)
+        {
+            var game = unitOfWork.GameRepo.GetGameOfId(gameId);
+            FillGameData(game, gameInfo);
+        }
+
+        private static void FillGameData(Game game, string[] gameInfo)
+        {
+            game.Title = gameInfo[1];
+            game.Type = gameInfo[2];
+            game.Series = gameInfo[3];
+            game.Number = gameInfo[4];
+            game.Person = gameInfo[5];
+            game.Company = gameInfo[6];
+            game.Year = gameInfo[7];
+            game.Score = gameInfo[8];
         }
     }
 }

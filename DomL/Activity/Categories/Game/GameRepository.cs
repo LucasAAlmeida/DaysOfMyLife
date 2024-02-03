@@ -40,5 +40,16 @@ namespace DomL.DataAccess
         {
             return DomLContext.Game.ToList();
         }
+
+        public Game GetGameOfId(int gameId)
+        {
+            return DomLContext.Game.SingleOrDefault(e => e.Id == gameId);
+        }
+
+        public void RemoveGameOfId(int gameId)
+        {
+            var game = DomLContext.Game.Single(g => g.Id == gameId);
+            DomLContext.Game.Remove(game);
+        }
     }
 }
