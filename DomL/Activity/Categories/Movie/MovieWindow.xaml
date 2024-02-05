@@ -28,7 +28,7 @@
                 <ComboBox Name="TitleCB" Width="300" IsEditable="True" LostFocus="TitleCB_LostFocus" IsTextSearchEnabled="True" />
                 <Label Name="TitleInfoLb" Margin="5,0" Width="40" />
             </DockPanel>
-            <DockPanel Margin="5" Visibility="Hidden">
+            <DockPanel Margin="5">
                 <Label Content="Type:" Width="90" />
                 <ComboBox Name="TypeCB" Width="300" IsEditable="True" IsTextSearchEnabled="True" />
                 <Label Name="TypeInfoLB" Margin="5,0" Width="40"/>

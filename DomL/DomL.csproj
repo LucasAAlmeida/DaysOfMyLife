@@ -160,6 +160,10 @@
     <Compile Include="Migrations\202012151743141_Initial.designer.cs">
       <DependentUpon>202012151743141_Initial.cs</DependentUpon>
     </Compile>
+    <Compile Include="Migrations\202402050057193_Add Type to Movie Table.cs" />
+    <Compile Include="Migrations\202402050057193_Add Type to Movie Table.designer.cs">
+      <DependentUpon>202402050057193_Add Type to Movie Table.cs</DependentUpon>
+    </Compile>
     <Compile Include="Windows\MediaWindow.xaml.cs">
       <DependentUpon>MediaWindow.xaml</DependentUpon>
     </Compile>
@@ -238,6 +242,9 @@
     </Compile>
     <EmbeddedResource Include="Migrations\202012151743141_Initial.resx">
       <DependentUpon>202012151743141_Initial.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Migrations\202402050057193_Add Type to Movie Table.resx">
+      <DependentUpon>202402050057193_Add Type to Movie Table.cs</DependentUpon>
     </EmbeddedResource>
     <EmbeddedResource Include="Properties\Resources.resx">
       <Generator>ResXFileCodeGenerator</Generator>

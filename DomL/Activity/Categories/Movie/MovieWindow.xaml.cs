@@ -19,13 +19,14 @@ namespace DomL.Presentation
         enum NamedIndices
         {
             title = 0,
-            series = 1,
-            number = 2,
-            person = 3,
-            company = 4,
-            year = 5,
-            score = 6,
-            description = 7
+            type = 1,
+            series = 2,
+            number = 3,
+            person = 4,
+            company = 5,
+            year = 6,
+            score = 7,
+            description = 8
         }
 
         public MovieWindow(string[] segments, Activity activity, UnitOfWork unitOfWork)
@@ -40,6 +41,7 @@ namespace DomL.Presentation
             var movies = MovieService.GetAll(unitOfWork);
 
             var titleList = movies.Select(u => u.Title).Distinct().ToList();
+            var typeList = movies.Where(u => u.Type != null).Select(u => u.Type).Distinct().ToList();
             var seriesList = movies.Where(u => u.Series != null).Select(u => u.Series).Distinct().ToList();
             var numberList = Util.GetDefaultNumbersList();
             var personList = movies.Where(u => u.Person != null).Select(u => u.Person).Distinct().ToList();
@@ -56,14 +58,16 @@ namespace DomL.Presentation
             Util.SetComboBox(TitleCB, titleList, orderedSegments[(int)NamedIndices.title]);
             TitleCB_LostFocus(null, null);
 
-            // MOVIE; Title; (Director Name); (Series Name); (Number In Series); (Score); (Description)
+            // MOVIE; Title; Type (Genre); Series; Number; Person (Director); Company (Production Company); Score; Description
             while (remainingSegments.Length > 2 && orderedSegments.Any(u => u == null)) {
                 var searched = remainingSegments[2];
                 if (int.TryParse(searched, out int number)) {
                     searched = number.ToString("00");
                 }
 
-                if (Util.ListContainsText(seriesList, searched)) {
+                if (Util.ListContainsText(typeList, searched))                {
+                    Util.PlaceOrderedSegment(orderedSegments, (int)NamedIndices.type, searched, indexesToAvoid);
+                } else if (Util.ListContainsText(seriesList, searched)) {
                     Util.PlaceOrderedSegment(orderedSegments, (int)NamedIndices.series, searched, indexesToAvoid);
                 } else if (Util.ListContainsText(numberList, searched)) {
                     Util.PlaceOrderedSegment(orderedSegments, (int)NamedIndices.number, searched, indexesToAvoid);
@@ -82,6 +86,7 @@ namespace DomL.Presentation
                 remainingSegments = remainingSegments.Where(u => u != remainingSegments[2]).ToArray();
             }
 
+            Util.SetComboBox(TypeCB, typeList, orderedSegments[(int)NamedIndices.type]);
             Util.SetComboBox(SeriesCB, seriesList, orderedSegments[(int)NamedIndices.series]);
             Util.SetComboBox(NumberCB, numberList, orderedSegments[(int)NamedIndices.number]);
             Util.SetComboBox(PersonCB, personList, orderedSegments[(int)NamedIndices.person]);
@@ -113,6 +118,7 @@ namespace DomL.Presentation
 
         private void UpdateOptionalComboBoxes(Movie movie)
         {
+            TypeCB.Text = movie.Type ?? TypeCB.Text;
             SeriesCB.Text = movie.Series ?? SeriesCB.Text;
             NumberCB.Text = movie.Number ?? NumberCB.Text;
             PersonCB.Text = movie.Person ?? PersonCB.Text;

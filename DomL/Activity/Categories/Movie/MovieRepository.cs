@@ -1,7 +1,6 @@
 ﻿using DomL.Business.Entities;
 using DomL.Business.Utils;
 using System.Linq;
-using System.Data.Entity;
 using System.Collections.Generic;
 
 namespace DomL.DataAccess
@@ -9,7 +8,7 @@ namespace DomL.DataAccess
     public class MovieRepository : DomLRepository<MovieActivity>
     {
         public MovieRepository(DomLContext context) : base(context) { }
-
+        
         public DomLContext DomLContext
         {
             get { return Context as DomLContext; }
@@ -38,6 +37,17 @@ namespace DomL.DataAccess
         public List<Movie> GetAllMovies()
         {
             return DomLContext.Movie.ToList();
+        }
+
+        public Movie GetMovieOfId(int movieId)
+        {
+            return DomLContext.Movie.SingleOrDefault(e => e.Id == movieId);
+        }
+
+        public void RemoveMovieOfId(int movieId)
+        {
+            var movie = DomLContext.Movie.Single(g => g.Id == movieId);
+            DomLContext.Movie.Remove(movie);
         }
     }
 }

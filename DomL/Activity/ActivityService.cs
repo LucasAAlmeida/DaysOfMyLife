@@ -121,6 +121,13 @@ namespace DomL.Business.Services
             return pcsa.OrderByDescending(u => u.Date).FirstOrDefault();
         }
 
+        /// <summary>
+        /// The primary way of getting DoML information
+        /// Straight from One Note lines directly to the Database
+        /// </summary>
+        /// <param name="rawSegments"></param>
+        /// <param name="activity"></param>
+        /// <param name="unitOfWork"></param>
         public static void SaveFromRawSegments(string[] rawSegments, Activity activity, UnitOfWork unitOfWork)
         {
             switch (activity.Category.Id) {

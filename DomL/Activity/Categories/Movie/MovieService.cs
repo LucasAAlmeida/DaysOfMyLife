@@ -4,19 +4,25 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Configuration;
 using System.IO;
-using System;
 using DomL.DataAccess;
-using System.Text.RegularExpressions;
 using DomL.Business.DTOs;
 using DomL.Business.Utils;
+using System.Text.RegularExpressions;
 
 namespace DomL.Business.Services
 {
     public class MovieService
     {
+        /// <summary>
+        /// The primary way of getting DoML information
+        /// From One Note lines -> through Media Window -> to the Database
+        /// </summary>
+        /// <param name="rawSegments"></param>
+        /// <param name="activity"></param>
+        /// <param name="unitOfWork"></param>
         public static void SaveFromRawSegments(string[] rawSegments, Activity activity, UnitOfWork unitOfWork)
         {
-            // MOVIE (Classification); Title; (Director Name); (Series Name); (Number In Series); (Score); (Description)
+            // MOVIE; Title; Type (Genre); Series; Number; Person (Director); Company (Production Company); Score; Description
             rawSegments[0] = "";
             var movieWindow = new MovieWindow(rawSegments, activity, unitOfWork);
 
@@ -65,6 +71,7 @@ namespace DomL.Business.Services
             var instance = GetByTitle(consolidated.Title, unitOfWork);
 
             var title = Util.GetStringOrNull(consolidated.Title);
+            var type = Util.GetStringOrNull(consolidated.Type);
             var series = Util.GetStringOrNull(consolidated.Series);
             var number = Util.GetStringOrNull(consolidated.Number);
             var person = Util.GetStringOrNull(consolidated.Person);
@@ -75,6 +82,7 @@ namespace DomL.Business.Services
             if (instance == null) {
                 instance = new Movie() {
                     Title = title,
+                    Type = type,
                     Series = series,
                     Number = number,
                     Person = person,
@@ -83,6 +91,7 @@ namespace DomL.Business.Services
                     Score = score,
                 };
             } else {
+                instance.Type = type ?? instance.Type;
                 instance.Series = series ?? instance.Series;
                 instance.Number = number ?? instance.Number;
                 instance.Person = person ?? instance.Person;
@@ -114,7 +123,7 @@ namespace DomL.Business.Services
         // Used to get information
         // from the database into a file
         // to be more easily manipulated
-        public static void SaveFromDatabaseToFile(string fileDir)
+        public static void SaveMediaFromDatabaseToFile(string fileDir)
         {
             List<Movie> movies;
             using (var unitOfWork = new UnitOfWork(new DomLContext()))
@@ -126,13 +135,92 @@ namespace DomL.Business.Services
             {
                 foreach (var movie in movies)
                 {
-                    string movieString = movie.Id + "\t" + movie.Title
+                    string movieString = movie.Id
+                        + "\t" + movie.Title + "\t" + movie.Type
                         + "\t" + movie.Series + "\t" + movie.Number
                         + "\t" + movie.Person + "\t" + movie.Company
                         + "\t" + movie.Year + "\t" + movie.Score;
                     file.WriteLine(movieString);
                 }
             }
+        }
+
+        // Used to save information
+        // from a file into the database
+        public static void SaveMediaFromFileToDatabase(string fileDir)
+        {
+            using (var unitOfWork = new UnitOfWork(new DomLContext()))
+            {
+                using (var reader = new StreamReader(fileDir + "MOVIES.txt"))
+                {
+                    string line = "";
+                    while ((line = reader.ReadLine()) != null)
+                    {
+                        var movieInfo = Regex.Split(line, "\t");
+                        var movieId = 0;
+                        var movieExists = int.TryParse(movieInfo[0], out movieId);
+
+                        var correctId = movieInfo[9];
+                        if (!string.IsNullOrWhiteSpace(correctId))
+                        {
+                            FixDuplicatedMedia(unitOfWork, movieId, correctId);
+                        }
+                        else if (!movieExists)
+                        {
+                            CreateMedia(unitOfWork, movieInfo);
+                        }
+                        else
+                        {
+                            UpdateExistingMedia(unitOfWork, movieId, movieInfo);
+                        }
+                    }
+
+                    unitOfWork.Complete();
+                }
+            }
+        }
+
+        /// <summary>
+        /// The movie record of id `movieId` is a duplicate of the movie record of id `correctId`
+        /// we should update all records that point to `movieId` to actually point to `correctId`
+        /// </summary>
+        /// <param name="unitOfWork"></param>
+        /// <param name="movieId"></param>
+        /// <param name="correctId"></param>
+        private static void FixDuplicatedMedia(UnitOfWork unitOfWork, int movieId, string correctId)
+        {
+            var movieActivityList = unitOfWork.MovieRepo.Find(b => b.MovieId == movieId);
+            var correctMovieId = int.Parse(correctId);
+            foreach (var movieActivity in movieActivityList)
+            {
+                movieActivity.MovieId = correctMovieId;
+            }
+            unitOfWork.MovieRepo.RemoveMovieOfId(movieId);
+        }
+
+        private static void CreateMedia(UnitOfWork unitOfWork, string[] movieInfo)
+        {
+            var movie = new Movie();
+            FillMovieData(movie, movieInfo);
+            unitOfWork.MovieRepo.CreateMovie(movie);
+        }
+
+        private static void UpdateExistingMedia(UnitOfWork unitOfWork, int movieId, string[] movieInfo)
+        {
+            var movie = unitOfWork.MovieRepo.GetMovieOfId(movieId);
+            FillMovieData(movie, movieInfo);
+        }
+
+        private static void FillMovieData(Movie movie, string[] movieInfo)
+        {
+            movie.Title = movieInfo[1];
+            movie.Type = movieInfo[2];
+            movie.Series = movieInfo[3];
+            movie.Number = movieInfo[4];
+            movie.Person = movieInfo[5];
+            movie.Company = movieInfo[6];
+            movie.Year = movieInfo[7];
+            movie.Score = movieInfo[8];
         }
     }
 }

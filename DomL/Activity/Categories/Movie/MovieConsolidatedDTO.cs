@@ -7,6 +7,7 @@ namespace DomL.Business.DTOs
     public class MovieConsolidatedDTO : ActivityConsolidatedDTO
     {
         public string Title;
+        public string Type;
         public string Series;
         public string Number;
         public string Person;
@@ -21,6 +22,7 @@ namespace DomL.Business.DTOs
             var movie = movieActivity.Movie;
             
             Title = Util.GetStringOrDash(movie.Title);
+            Type = Util.GetStringOrDash(movie.Type);
             Series = Util.GetStringOrDash(movie.Series);
             Number = Util.GetStringOrDash(movie.Number);
             Person = Util.GetStringOrDash(movie.Person);
@@ -35,6 +37,7 @@ namespace DomL.Business.DTOs
         public MovieConsolidatedDTO(MovieWindow movieWindow, Activity activity) : base(activity)
         {
             Title = Util.GetStringOrDash(movieWindow.TitleCB.Text);
+            Type = Util.GetStringOrDash(movieWindow.TypeCB.Text);
             Series = Util.GetStringOrDash(movieWindow.SeriesCB.Text);
             Number = Util.GetStringOrDash(movieWindow.NumberCB.Text);
             Person = Util.GetStringOrDash(movieWindow.PersonCB.Text);
@@ -49,13 +52,14 @@ namespace DomL.Business.DTOs
         public MovieConsolidatedDTO(string[] backupSegments) : base(backupSegments)
         {
             Title = backupSegments[5];
-            Series = backupSegments[6];
-            Number = backupSegments[7];
-            Person = backupSegments[8];
-            Company = backupSegments[9];
-            Year = backupSegments[10];
-            Score = backupSegments[11];
-            Description = backupSegments[12];
+            Type = backupSegments[6];
+            Series = backupSegments[7];
+            Number = backupSegments[8];
+            Person = backupSegments[9];
+            Company = backupSegments[10];
+            Year = backupSegments[11];
+            Score = backupSegments[12];
+            Description = backupSegments[13];
 
             FillCommonInfo();
         }
@@ -81,10 +85,11 @@ namespace DomL.Business.DTOs
 
         public string GetMovieActivityInfo()
         {
-            return Title + "\t" + Person
+            return Title + "\t" + Type
                 + "\t" + Series + "\t" + Number
-                + "\t" + Company + "\t" + Year
-                + "\t" + Score + "\t" + Description;
+                + "\t" + Person + "\t" + Company 
+                + "\t" + Year + "\t" + Score
+                + "\t" + Description;
         }
     }
 }

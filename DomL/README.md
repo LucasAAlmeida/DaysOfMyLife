@@ -66,7 +66,7 @@ Saved stuff will be in OneDrive/Days of my Life/DomL
 ==============================================================
 Entity Framework Commands to remember
 
-Add_Migration
+Add Migration
 Add-Migration [-Name] <String> [-OutputDir <String>] [-Context <String>] [-Project <String>] [-StartupProject <String>] [-Environment <String>] [<CommonParameters>]
 
 Remove-Migration
